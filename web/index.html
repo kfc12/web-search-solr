@@ -1,0 +1,101 @@
+<html>
+<head>
+    <style>
+        body {
+            padding: 0;
+            margin:0;
+        }
+        h3 {
+            color:white;
+            text-align: center;
+            margin: 0;
+            width: 100%;
+            padding:20px;
+            background-color: gray;
+            font-size: 30px;
+            margin-bottom: 30px; 
+        }
+        ul {
+            padding-left:0;
+            margin:10px;
+        }
+        li {
+            list-style:none;
+            padding-bottom: 15px;
+        }
+        
+        .highlight {
+            background-color:yellow;
+        }
+        input[type=text] {
+            font-size: 30px;
+            width:100%;
+            margin:10px;
+        }
+        a, a:visited {
+            color:green;
+            font-size: 17px;
+        }
+        p {
+            font-size: 13px;
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <title>Solr Search</title>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+
+    <h3>DI Team Wiki Page Search</h3>
+    
+    <input type="text" id="textinput" placeholder="SEARCH" />
+
+    <ul id="results">
+
+    </ul>
+
+    <script>
+        $(document).ready(function() {
+            var textbox = $('#textinput');
+            var results = $('#results');
+
+            textbox.keyup(function(){
+                var text = textbox.val();
+                
+                var eitherSide = 80;
+
+                // make call to solr
+
+                //var url = "http://127.0.0.1:8983/solr/wiki-collection/select?q="+text+"&fl=url&wt=json&indent=on";
+                var url = 'http://localhost:8983/solr/wiki-collection/select?q="'+text+'"&qt=dismax_ac_&wt=json'
+
+                $.get(url, function(res) {
+                    results.html('');
+
+                    var json = JSON.parse(res);
+
+                    for (idx in json.response.docs) {
+                        var doc = json.response.docs[idx];
+                        var url = doc.url[0];
+                        var body = doc.body[0];
+
+                        var needle = "<span class='highlight'>"+text+"</span>";
+                        body = stringReplace(body, text, needle);
+
+                        var index = body.indexOf(needle);
+                        body = body.substring((index - eitherSide < 0 ? 0 : index-eitherSide), (index + eitherSide > body.length ? body.length -1 : index + eitherSide))
+
+                        results.append("<li><a href='"+url+"' target='_blank'>"+url+"</a><p>"+body+"</p></li>");
+                    }
+                
+                });
+
+            });
+        });
+        function stringReplace(original, replace, withthis) {
+            return original.replace(new RegExp(replace, 'g'), withthis);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/enable-cors: "true"
+    
+spec:
+  tls:
+    - secretName:  wiki-search-certificate
+      hosts:
+        - wiki-search.di-dev.gcp0.bwcom.net
+
+  rules:
+    - host: wiki-search.di-dev.gcp0.bwcom.net
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: frontend
+              servicePort: 6060
