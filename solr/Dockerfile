@@ -1,0 +1,3 @@
+FROM solr
+
+EXPOSE 8983:8983

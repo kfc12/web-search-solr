@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+  annotations:
+    acme/certificate: wiki-search.di-dev.gcp0.bwcom.net
+    acme/secretName: wiki-search-certificate
+spec:
+  type: ClusterIP
+  ports:
+    - port: 6060
+      targetPort: 6060
+  selector:
+    app: frontend
