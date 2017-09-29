@@ -7,6 +7,9 @@ For use in Docker, only the Dockerfile is needed.  The docker-compose file is us
 
 If using with kubernetes, only the yaml files are necessary.
 
+The following commands are given if any of the files need editing.
+
+
 # Docker Compose
 
   $ docker build -t <nameyourimage> .
