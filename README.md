@@ -7,18 +7,18 @@ For use in Docker, only the Dockerfile is needed.  The docker-compose file is us
 
 If using with kubernetes, only the yaml files are necessary.
 
-# Docker Compose
+Docker Compose
 
   $ docker build -t <nameyourimage> .
 
-# Docker Compose
+Docker Compose
 
   $ compose up
 
-# Convert the docker-compose to yaml files
+Convert the docker-compose to yaml files
 
   $ kompose convert
 
-# To run the docker-compose in kubernetes without converting to yaml files
+To run the docker-compose in kubernetes without converting to yaml files
 
   $ kompose convert
