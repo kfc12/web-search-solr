@@ -5,4 +5,20 @@ This is a web application that provides a search box to search for documents in 
 
 For use in Docker, only the Dockerfile is needed.  The docker-compose file is used to create the necessary yaml files, using the 'kompose convert' command in the same directory as the docker-compose file.  The convert will generate the deployment yaml and the service yaml. 
 
-If using with kubernetes, only the yaml files are necessary. 
+If using with kubernetes, only the yaml files are necessary.
+
+# Docker Compose
+
+  $ docker build -t <nameyourimage> .
+
+# Docker Compose
+
+  $ compose up
+
+# Convert the docker-compose to yaml files
+
+  $ kompose convert
+
+# To run the docker-compose in kubernetes without converting to yaml files
+
+  $ kompose convert
