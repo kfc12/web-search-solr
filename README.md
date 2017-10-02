@@ -10,7 +10,7 @@ If using with kubernetes, only the yaml files are necessary.
 The following commands are given if any of the files need editing.
 
 
-# Docker Compose
+# Docker 
 
   $ docker build -t <nameyourimage> .
 	
